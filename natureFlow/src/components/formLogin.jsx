@@ -1,25 +1,60 @@
-import  { useState } from 'react'
+import  { useState, useEffect } from 'react'
 import {
    Card,
    Input,
    Button,
    Typography,
  } from "@material-tailwind/react";
+ import Cookies from 'js-cookie'
  import axios from 'axios'
+ import { useNavigate } from 'react-router-dom';
 export const FormLogin = () => {
+  const navigate= useNavigate()
    const[email, setEmail]=useState()
    const[password, setPassword]=useState()
+   const [error, setError]= useState()
    const handleSubmit=async()=>{
       try{
         const response= await axios.post('http://localhost:3000/user/login',{email,password})
         console.log(response);
-      }catch(error){
+        if (response.data && response.data.token) {
+          Cookies.set('token', response.data.token, { expires: 7 });
+          setError(false);
+         
+            navigate('/verhuella');
+          
+        } else {
+          setError(true);
+        }
+      } catch(error) {
+        setError(true);
         console.log(error);
       }
+    
+      
+   }
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(false); 
+      }, 3000);
+      return () => clearTimeout(timer);
     }
+  }, [error]);
   return (
    <>
+   
     <Card color="transparent" shadow={false}>
+    {
+    error&&(
+      <>
+       <Typography variant="h4" color="blue-gray" className='text-orange-900'>
+     Usuario o contraseña incorrectos
+      </Typography>
+      </>
+    )
+   }
       <Typography variant="h4" color="blue-gray">
        Iniciar Sesión
       </Typography>

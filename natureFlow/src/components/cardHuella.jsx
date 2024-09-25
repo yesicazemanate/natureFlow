@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
    Card,
-   CardHeader,
    CardBody,
    CardFooter,
    Typography,
@@ -22,7 +21,7 @@ export const CardHuella = () => {
       
       }
 getHuella()
-   },[data])
+   },[])
   return (
    <>
    {data&&data.map((data)=>(
