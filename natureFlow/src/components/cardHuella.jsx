@@ -21,7 +21,7 @@ export const CardHuella = () => {
       
       }
 getHuella()
-   },[])
+   },[data])
   return (
    <>
    {data&&data.map((data)=>(

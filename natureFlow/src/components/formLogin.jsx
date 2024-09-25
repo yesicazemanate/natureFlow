@@ -33,6 +33,9 @@ export const FormLogin = () => {
     
       
    }
+   const handle=()=>{
+    navigate('/register')
+   }
 
   useEffect(() => {
     if (error) {
@@ -95,6 +98,9 @@ export const FormLogin = () => {
         <Button className="mt-6 bg-light-green-700" fullWidth type='submit'>
        Iniciar Sesión 
         </Button>
+        <button onClick={handle} color="blue-gray" className="-mb-3">
+        ¿No tienes cuenta registrate?
+          </button>
        </div>
       </form>
     </Card>

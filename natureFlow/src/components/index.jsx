@@ -6,7 +6,9 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 export const FormRegister = () => {
+  const navigate= useNavigate()
   const [name, setName] = useState()
   const [lastname, setLastname]= useState()
   const [email, setEmail]= useState()
@@ -19,6 +21,10 @@ export const FormRegister = () => {
       console.log(error);
     }
   }
+  const handle=()=>{
+    navigate('/')
+  }
+  
   return (
     <>
  <Card color="transparent" shadow={false} className='w-2/4'>
@@ -87,11 +93,12 @@ export const FormRegister = () => {
           />
         </div>
        
-  <Button className='bg-light-green-700' type='submit'>
+  <Button
+  className='bg-light-green-700' type='submit' >
             Registrarse
   </Button>
-        
       </form>
+  <button onClick={handle}>¡Ya tienes una cuenta inicia sesión!</button>
     </Card>
     </>
   )
